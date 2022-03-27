@@ -1,0 +1,30 @@
+(load "../util.scm")
+
+;2_25
+(define list-a (list 1 3 (list 5 7) 9))
+(define list-b (list (list 7)))
+(define list-c (list 1 (list 2 (list 3 (list 4 (list 5 (list 6 7)))))))
+
+(display list-a)
+(newline)
+(display list-b)
+(newline)
+(display list-c)
+(newline)
+(display (car (cdaddr list-a)))
+(newline)
+(display (caar list-b))
+(newline)
+(display (cadadr (cadadr (cadadr list-c))))
+(newline)
+(display (reverse list-a))
+(newline)
+(define list-d (list 1 3 5))
+(define list-e (list 2 4 6))
+
+;2_26
+(display (append list-d list-e))
+(newline)
+(display (cons list-d list-e))
+(newline)
+(display (list list-d list-e))
