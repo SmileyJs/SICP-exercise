@@ -1,0 +1,26 @@
+(load "../util.scm")
+
+(define (equal? a b)
+    (cond   ((and   (pair? a)
+                    (pair? b)
+                    (equal? (car a) (car b))
+                    (equal? (cdr a) (cdr b)))
+                    #t)
+                ;eq? actually handles the cases where: 
+                ; one of the operands is '() or nill, as well as only one of the operands being a pair 
+            (else (eq? a b)))
+)
+
+(display (equal? 'a 'a))
+(newline)
+(display (equal? '(a) '(a)))
+(newline)
+(display (equal? '(a b) '(a b)))
+(newline)
+(display (equal? '(a c) '(a  b)))
+(newline)
+(display (equal? '(a b) 'a))
+(newline)
+(display (equal? '(a) ()))
+(newline)
+(display (equal? () ()))
