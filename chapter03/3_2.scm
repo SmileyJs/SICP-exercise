@@ -1,0 +1,22 @@
+(load "../util.scm")
+
+(define (make-monitored f)
+    (let ((count 0))
+        (lambda (arg)
+            (cond ((eq? arg 'how-many-calls?)
+                   count)
+                  ((eq? arg 'reset-count)
+                   (begin (set! count 0)
+                          count))
+                  (else (begin (set! count (+ 1 count))
+                               (f arg)))))))
+
+(define s (make-monitored sqrt))
+
+(display (s 100))
+(newline)
+(display (s 'how-many-calls?))
+(newline)
+(display (s 'reset-count))
+(newline)
+(display (s 'how-many-calls?))
