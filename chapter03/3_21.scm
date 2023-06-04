@@ -1,0 +1,100 @@
+(load "../util.scm")
+
+(define (front-ptr q)
+    (car q)
+)
+
+(define (rear-ptr q)
+    (cdr q)
+)
+
+(define (set-front-ptr! q item)
+    (set-car! q item)
+)
+
+(define (set-rear-ptr! q item)
+    (set-cdr! q item)
+)
+
+(define (make-queue)
+    (cons '() '())
+)
+
+(define (empty-queue? q)
+    (null? (front-ptr q))
+)
+
+(define (front-queue q)
+    (if (empty-queue? q)
+        (error "front called with empty queue!")
+        (car q))
+)
+
+(define (insert-queue! q item)
+    (let ((new-pair (cons item '())))
+        (cond  ((empty-queue? q)
+                (set-front-ptr! q new-pair)
+                (set-rear-ptr! q new-pair)
+                q)
+               (else
+                (set-cdr! (rear-ptr q) new-pair)
+                (set-rear-ptr! q new-pair)
+                q)))
+)
+
+(define (delete-queue! q)
+    (if (empty-queue? q)
+        (error "DELETE called with empty queue!")
+        (set-front-ptr! q (cdr (front-ptr q)))
+    )
+)
+
+(define (print-queue q)
+    (define (iter front-ptr)
+        (if (null? front-ptr)
+            (newline)
+            (begin (display (car front-ptr))
+                (iter (cdr front-ptr))
+            )
+        )
+    )
+
+    (iter (front-queue q))
+)
+
+; 3_21
+(define q1 (make-queue))
+(insert-queue! q1 'a)
+(display q1)
+(newline)
+(print-queue q1)
+(newline)
+
+(insert-queue! q1 'b)
+(display q1)
+(newline)
+(print-queue q1)
+(newline)
+
+(insert-queue! q1 'c)
+(display q1)
+(newline)
+(print-queue q1)
+(newline)
+
+(delete-queue! q1)
+(display q1)
+(newline)
+(print-queue q1)
+(newline)
+
+(delete-queue! q1)
+(display q1)
+(newline)
+(print-queue q1)
+(newline)
+
+(delete-queue! q1)
+(display q1)
+(newline)
+(print-queue q1)
